@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-    <appSettings>
-        <add key="token" value="token" />
-        <add key="url" value="http://example.com/.well-known/mercure?topic=door_keys" />
-    </appSettings>
-</configuration>
