@@ -112,16 +112,18 @@ namespace App
                 {
                     doorKey.IssuedAt = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                     Console.WriteLine("Write data successfully!");
+                    doorKey.Status = DoorKey.StatusSuccess;
                 }
                 else
                 {
                     doorKey.ErrorMessage = "Ошибка библиотеки при записи ключа";
+                    doorKey.Status = DoorKey.StatusFail;
                 }
             }
             catch (Exception err)
             {
                 doorKey.ErrorMessage = "Ошибка библиотеки: " + err.Message;
-
+                doorKey.Status = DoorKey.StatusFail;
             }
 
             if (doorKey.ErrorMessage != null) {

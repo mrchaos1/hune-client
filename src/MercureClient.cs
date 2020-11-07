@@ -88,10 +88,11 @@ namespace App
 
         public void keyConfirm(DoorKey key)
         {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string responseText = "";
+
             try
             {
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-
                 string serializedResult = serializer.Serialize(key);
                 string url = config.ServerURL + "/hune/key/" + key.Id + "/confirm";
 
@@ -101,11 +102,22 @@ namespace App
 
                 client.Encoding = System.Text.Encoding.UTF8;
                 string reply = client.UploadString(url, "PUT", serializedResult);
-
+            }
+            catch (WebException exception)
+            {
+              var responseStream = exception.Response?.GetResponseStream();
+              if (responseStream != null)
+              {
+                  using (var reader = new StreamReader(responseStream))
+                  {
+                     responseText = reader.ReadToEnd();
+                  }
+              }
+              Console.WriteLine("Ошибка при отправке запроса на " + key.CallbackUrl + ": " + responseText);
             }
             catch (Exception err)
             {
-                Console.WriteLine("Ошибка при отправке запроса: " + err.Message);
+                Console.WriteLine("Ошибка при отправке запроса на " + key.CallbackUrl + ": " + err.Message);
             }
         }
     }

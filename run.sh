@@ -1,3 +1,2 @@
 #!/bin/bash
-
-csc HuneClient.cs -out:build/HuneClient.exe
+csc -platform:x86 src/*.cs -out:build/HuneClient.exe && mono ./build/HuneClient.exe

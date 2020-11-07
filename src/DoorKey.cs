@@ -20,6 +20,10 @@ namespace App
 {
     public class DoorKey
     {
+        public const int StatusNew = 0;
+        public const int StatusSuccess = 1;
+        public const int StatusFail = -1;
+
         public int Id { get; set; }
         public string SystemCode { get; set; }
         public string HotelCode  { get; set; }
@@ -29,6 +33,8 @@ namespace App
         public int CardNumber { get; set; }
         public string Address { get; set; }
         public bool TerminateOld { get; set; }
+        public string CallbackUrl { get; set; }
+        public int Status { get; set; }
 
         public string ErrorMessage { get; set; }
         public string IssuedAt { get; set; }
